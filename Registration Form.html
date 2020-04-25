@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+		<title>exam2</title>
+		<style type="text/css">
+			
+			table
+			{
+				background-color: #ddeeff; 
+				border: solid 1px black;
+			}
+			
+			td
+			{
+				padding: 3px; 
+				border: solid 1px black;
+			}
+		</style>
+		<SCRIPT>
+		function fullnameF()
+		{
+			var str = document.exam2.fullname.value;
+			var re = /^[a-zA-Z]+\s[a-zA-Z]+$/;  // \s means white space.
+			var result = re.test(str);
+			if(result == false)
+			{
+				alert("not valid!");
+				document.exam2.fullname.value = " ";
+			}
+		}
+		
+		function ssnF()
+		{
+			var str = document.exam2.ssn.value;
+			//var re = /^[0-9]{3}[\-'][0-9]{2}[\-'][0-9]{4}$/; 
+			var re = /^[0-9]{3}\-[0-9]{2}\-[0-9]{4}$/; //Hypen(-) is special character so that we should use "\" in front of it if we use it as literal.
+			var result = re.test(str);
+			if(result == false)
+			{
+				alert("not valid!");
+				document.exam2.ssn.value = " ";
+			}
+		}
+		
+		function emailF()
+		{
+			var str = document.exam2.email.value; 
+			var re =/^[a-zA-Z0-9]+(\.[a-aA-z0-9]+)*@[a-zA-Z0-9]+(\.[a-zA-Z0-9]+)*(\.[a-z]{2,3})$/;
+			var result = re.test(str);
+			if(result == false)
+			{
+				alert("not valid!");
+				document.exam2.email.value = " ";
+			}
+			
+		}
+
+		function birthdayF() // 30 points
+		{
+			//implement the code that validate birthdays here... 30 points
+			var str = document.exam2.birthday.value;
+			var re = /^([0-1]?[0-9])\/([0-3]?[0-9])\/([0-9]?[0-9]?[0-9][0-9])$/;
+			
+			//([0-1]?[0-9])\/ --> allows the user to enter the month with or without a preceding 0 followed by '/'
+			//([0-3]?[0-9])\/ --> allows the user to enter the day with or without a preceding 0 followed by '/'
+			//([0-9]?[0-9]?[0-9][0-9]) --> allows the user to enter the year with or without preceding 2 digits
+			//For example, 1998 or 98 would be accepted
+			
+			var result = re.test(str);
+			
+			if (result == false) {
+				alert("not valid!!!");
+				document.exam2.birthday.value = "";
+			}
+		}
+
+		function phoneF()
+		{
+			var str = document.exam2.phone.value;
+			var re = /^\(([0-9]{3})\)([0-9]{3})-([0-9]{4})$/;
+			var result = re.test(str);
+			if(result == false)
+			{
+				alert("not valid!");
+				document.exam2.phone.value = " ";
+			}
+		}
+
+		function streetF()
+		{
+			var str = document.exam2.street.value;
+			var re = /^(([0-9]+\s)|([0-9]+\-[0-9]+[a-zA-Z]+\s)|([0-9]+\s[0-9]+\/[0-9]+\s))[a-zA-Z]+[a-zA-Z]+/g;
+
+			//([0-9]+\s) --> allows numbers for example "323".  \s means white space.
+			//([0-9]+\-[0-9]+[a-zA-Z]+\s) --> allows numbers with hypen(-) for example "323-1D". Hypen(-) is special character so that we should use "\" in front of it if we use it as literal.
+			//([0-9]+\s[0-9]+\/[0-9]+\s) --> allows numbers with "/" for example "323 1/2".  Slash(/) is a special character sothat we should use "\" in front of it if we use it as literal.
+			// We combine all these three regular expression with "|" that is "OR".  
+
+			var result = re.test(str);
+			if(result == false)
+			{
+				alert("not valid!");
+				document.exam2.street.value = " ";
+			}
+
+		}
+
+		function cityF() // 20 points 
+		{
+			//implement the code that validate city name here... 20 points
+			var str = document.exam2.city.value;
+			var re = /^[a-zA-Z]*\s?[a-zA-Z]*$/;
+			
+			//[a-zA-Z]* --> allows any size string of characters
+			//\s? --> allows 0 or 1 spaces if the city has more than one word
+			//[a-zA-Z]* --> allows another string to be entered if needed
+			
+			var result = re.test(str);
+			
+			if (result == false) {
+				alert("not valid!");
+				document.exam2.city.value = "";
+			}
+		}
+
+		function zipF()
+		{
+			var str = document.exam2.zip.value; //
+			//alert(str);
+			var re = /^[0-9]{5}$/;
+			var result = re.test(str);
+			if(result == false)
+			{
+				alert("not valid!");
+				document.exam2.zip.value = " ";
+			}
+		}
+
+		function AllInfo() // 50 points
+		{
+			//implement the code that creates a html documents to display all information a user input... 50 points
+			//hints:  use document.write() to create html documents.
+			var name = document.exam2.fullname.value;
+			var ssn = document.exam2.ssn.value;
+			var email = document.exam2.email.value;
+			var gender = document.exam2.gender.value;
+			var bday = document.exam2.birthday.value;
+			var phone = document.exam2.phone.value;
+			var street = document.exam2.street.value;
+			var city = document.exam2.city.value;
+			var zip = document.exam2.zip.value;
+			var sel = document.exam2.state;
+			var state = sel.options[sel.selectedIndex].text;
+			
+			document.write("<style>table {background-color:#ddeeff;border:1px solid black} td, tr {border:1px solid black;} td {padding:3px;}</style>" +
+							"<table><tr><td>Full Name: </td><td>" + name + "</td></tr>" +
+							"<tr><td>Social Security Number: </td><td>" + ssn + "</td></tr>" +
+							"<tr><td>Email: </td><td>" + email + "</td></tr>" +
+							"<tr><td>Gender: </td><td>" + gender + "</td></tr>" +
+							"<tr><td>Birthday: </td><td>" + bday + "</td></tr>" + 
+							"<tr><td>Phone Number: </td><td>" + phone + "</td></tr>" +
+							"<tr><td colspan='2' align='center'>Home Address</td></tr>" + 
+							"<tr><td colspan='2' align='center'>" + street + "<br/>" + city + ", " + state + " " + zip + "</td></tr></table");
+		}
+		
+		</SCRIPT>
+	</head>
+	<body>
+			<form name="exam2">
+			<table>
+				<tr>
+					<th colspan="2"> Registration Form</th>
+				</tr>
+
+				<tr>
+					<td>Full Name: </td><td><input type="text" name="fullname" size="50" onChange="fullnameF()"></td>
+				</tr>
+
+				<tr>
+					<td>Social Security Number: </td><td><input type="text" name="ssn" size="50" onChange="ssnF()"></td>
+				</tr>
+				
+				<tr>
+					<td>E-mail Address: </td><td><input type="text" name="email" size="50" onChange="emailF()"></td>
+				</tr>
+				
+				<tr>
+					<td>Gender: </td><td><input type="radio" name="gender" value="male">Male <input type="radio" name="gender" value="female">Female</td>
+				</tr>
+				
+				<tr>
+					<td>Birthday: </td><td><input type="text" name="birthday" size="50" onChange="birthdayF()"></td>
+				</tr>
+				
+				<tr>
+					<td>Phone Number: (000)000-0000 </td><td><input type="text" name="phone" size="50" onChange="phoneF()"></td>
+				</tr>
+				
+				<tr>
+					<td>Home Address:</td>
+					<td> 
+						<table> <tr><td> Street: </td> <td><input type="text" name="street" onChange="streetF()"></td></tr>
+								
+								<tr><td> City: </td> <td><input type="text" name="city" onChange="cityF()"> State: <select name="state"> 
+											<option>-State-</option>
+											<option>Alaska</option>
+											<option>Connecticut</option>
+											<option>District of Columbia</Option>
+											<option>Florida</option>
+											<option>Georgia</option>
+											<option>Hawaii</option>
+											<option>Illinoise</option>
+											<option>Kentucky</option>
+											<option>Louisiana</option>
+											<option>Massachusetts</option>
+											<option>New Jersey</option>
+											<option>Oregon</option>
+											<option>Rhode Island</option>
+											<option>South Carolina</option>
+											<option>Texas</option>
+											<option>Utah</option>
+											<option>Virginia</option>
+											<option>Washington</option>
+										</select> </td></tr>
+								
+								<tr><td> Zip: </td> <td><input type="text" name="zip" onChange="zipF()"></td></tr></table>
+					</td>
+				</tr>
+			
+				<tr>
+					<td colspan="2"><p style="text-align: center"><button onClick="AllInfo()">Submit</button><input type="reset" value="Reset"></p></td>
+				</tr>
+				
+			</table>
+			</form>
+
+		
+	</body>
+</html>
